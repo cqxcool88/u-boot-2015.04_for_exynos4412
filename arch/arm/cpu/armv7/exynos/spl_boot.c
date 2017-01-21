@@ -292,13 +292,13 @@ void board_init_f(unsigned long bootflag)
 
 	if (do_lowlevel_init())
 		power_exit_wakeup();
-
+#if 1
 	copy_uboot_to_ram();
 
 	/* Jump to U-Boot image */
 	uboot = (void *)CONFIG_SYS_TEXT_BASE;
 	(*uboot)();
-	/* Never returns Here */
+#endif	/* Never returns Here */
 }
 
 /* Place Holders */

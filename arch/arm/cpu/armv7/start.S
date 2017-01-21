@@ -31,6 +31,39 @@
 
 	.globl	reset
 	.globl	save_boot_params_ret
+	.globl	led_on
+#define MEM_DLLl_ON
+
+#if 0
+led_on:
+	ldr r0, =0x11000100
+	mov r1, #1
+	str r1, [r0]
+	ldr r0, =0x11000060
+	mov r1, #0
+	str r1, [r0]
+	ldr r0, =0x11000104
+	mov r1, #1
+	str r1, [r0]
+	ldr r0, =0x11000064
+	mov r0, #0
+	str r0, [r0]	
+	bx lr
+#endif
+
+/* added by cqx */
+led_on:
+#if 1
+	ldr r0, =0x11000060		//GPK1[1] LED3
+	ldr r1, [r0]
+	bic r1, r1, #0xf0
+	orr r1, r1, #0x10
+	str r1, [r0]
+
+	ldr r1, [r0, #4]
+	orr r1, r1, #2
+	str r1, [r0, #4]
+#endif
 
 reset:
 	/* Allow the board to save important registers */
@@ -69,7 +102,7 @@ save_boot_params_ret:
 	bl	cpu_init_cp15
 	bl	cpu_init_crit
 #endif
-
+//	bl	led_on
 	bl	_main
 
 /*------------------------------------------------------------------------------*/

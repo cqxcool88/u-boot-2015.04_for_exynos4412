@@ -241,6 +241,8 @@ ifeq ($(HOSTARCH),$(ARCH))
 CROSS_COMPILE ?=
 endif
 
+CROSS_COMPILE := /usr/local/arm/arm-2009q3/bin/arm-none-linux-gnueabi-
+
 KCONFIG_CONFIG	?= .config
 export KCONFIG_CONFIG
 

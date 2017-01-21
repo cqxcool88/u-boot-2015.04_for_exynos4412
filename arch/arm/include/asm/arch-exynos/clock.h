@@ -9,6 +9,7 @@
 #define __ASM_ARM_ARCH_CLOCK_H_
 
 #ifndef __ASSEMBLY__
+
 struct exynos4_clock {
 	unsigned char	res1[0x4200];
 	unsigned int	src_leftbus;
@@ -237,6 +238,284 @@ struct exynos4_clock {
 	unsigned int	div_iem_l1;
 };
 
+struct exynos4x12_clock {
+	unsigned char	res1[0x4200];
+	unsigned int	src_leftbus;	// 0x4200
+	unsigned char	res2[0x1fc];	// 0x4204
+	unsigned int	mux_stat_leftbus;	// 0x4400
+	unsigned char	res3[0xfc];		// 0x4404
+	unsigned int	div_leftbus;	// 0x4500
+	unsigned char	res4[0xfc];
+	unsigned int	div_stat_leftbus;	// 0x4600
+	unsigned char	res5[0x1fc];
+	unsigned int	gate_ip_leftbus;	// 0x4800
+	unsigned char	res6[0x12c];	// 0x4804
+	unsigned int	gate_ip_image;	// 0x4930
+	unsigned char	res7[0xcc];
+	unsigned int	clkout_leftbus;		// 0x4a00
+	unsigned int	clkout_leftbus_div_stat;	// 0x4a04
+	unsigned char	res8[0x37f8];
+	unsigned int	src_rightbus;	// 0x8200
+	unsigned char	res9[0x1fc];
+	unsigned int	mux_stat_rightbus;	// 0x8400
+	unsigned char	res10[0xfc];
+	unsigned int	div_rightbus;	// 0x8500
+	unsigned char	res11[0xfc];
+	unsigned int	div_stat_rightbus;	// 0x8600
+	unsigned char	res12[0x1fc];
+	unsigned int	gate_ip_rightbus;	// 0x8800
+	unsigned char	res13[0x15c];
+	unsigned int	gate_ip_perir;	// 0x8960
+	unsigned char	res14[0x9c];
+	unsigned int	clkout_rightbus;	// 0x8a00
+	unsigned int	clkout_rightbus_div_stat;
+	unsigned char	res15[0x3608];	// 0x8a08
+	unsigned int	epll_lock;	// 0xc010
+	unsigned char	res16[0xc];
+	unsigned int	vpll_lock;	// 0xc020
+	unsigned char	res17[0xec];
+	unsigned int	epll_con0;	// 0xc110
+	unsigned int	epll_con1;	// 0xc114
+	unsigned int	epll_con2;	// 0xc118
+	unsigned char	res18[0x4];
+	unsigned int	vpll_con0;	// 0xc120
+	unsigned int	vpll_con1;
+	unsigned int	vpll_con2;	// 0xc128
+	unsigned char	res19[0xe4];
+	unsigned int	src_top0;	// 0xc210
+	unsigned int	src_top1;
+	unsigned char	res20[0x8];	// 0xc218
+	unsigned int	src_cam;	// 0xc220
+	unsigned int	src_tv;
+	unsigned int	src_mfc;	// 0xc228
+	unsigned int	src_g3d;	// 0xc22c
+	unsigned char	res21[0x4];
+	unsigned int	src_lcd;	// 0xc234
+	unsigned int	src_isp;	// 0xc238
+	unsigned int	src_maudio;
+	unsigned int	src_fsys;	// 0xc240
+	unsigned char	res22[0xc];
+	unsigned int	src_peril0;	// 0xc250
+	unsigned int	src_peril1;
+	unsigned int	src_cam1;	// 0xc258
+	unsigned char	res23[0xb4];
+	unsigned int	src_mask_top;	// 0xc310
+	unsigned char	res24[0xc];
+	unsigned int	src_mask_cam;	// 0xc320
+	unsigned int	src_mask_tv;	// 0xc324
+	unsigned char	res25[0xc];
+	unsigned int	src_mask_lcd;	// 0xc334
+	unsigned int	src_mask_isp;
+	unsigned int	src_mask_maudio;
+	unsigned int	src_mask_fsys;	// 0xc340
+	unsigned char	res26[0xc];
+	unsigned int	src_mask_peril0;	// 0xc350
+	unsigned int	src_mask_peril1;	// 0xc354
+	unsigned char	res27[0xb8];
+	unsigned int	mux_stat_top0;	// 0xc410
+	unsigned int	mux_stat_top1;	// 0xc414
+	unsigned char	res28[0x10];	// 0xc418
+	unsigned int	mux_stat_mfc;	// 0xc428
+	unsigned int	mux_stat_g3d;	// 0xc42c
+	unsigned char	res29[0x28];	// 0xc430
+	unsigned int	mux_stat_cam1;	// 0xc458
+	unsigned char	res30[0xb4];	// 0xc45c
+	unsigned int	div_top;		// 0xc510
+	unsigned char	res31[0xc];		// 0xc514
+	unsigned int	div_cam;		// 0xc520
+	unsigned int	div_tv;		// 0xc524
+	unsigned int	div_mfc;	// 0xc528
+	unsigned int	div_g3d;	// 0xc52c
+	unsigned char	res32[0x4];	// 0xc530
+	unsigned int	div_lcd;	// 0xc534
+	unsigned int	div_isp;	// 0xc538
+	unsigned int	div_maudio;	// 0xc53c
+	unsigned int	div_fsys0;	// 0xc540
+	unsigned int	div_fsys1;	// 0xc544
+	unsigned int	div_fsys2;	// 0xc548
+	unsigned int	div_fsys3;	// 0xc54c
+	unsigned int	div_peril0;		// 0xc550
+	unsigned int	div_peril1;		// 0xc554
+	unsigned int	div_peril2;		// 0xc558
+	unsigned int	div_peril3;		// 0xc55c
+	unsigned int	div_peril4;		// 0xc560
+	unsigned int	div_peril5;		// 0xc564
+	unsigned int	div_cam1;		// 0xc568
+	unsigned char	res33[0x14];	// 0xc56c
+	unsigned int	div2_ratio;		// 0xc580
+	unsigned char	res34[0x8c];	// 0xc584
+	unsigned int	div_stat_top;	// 0xc610
+	unsigned char	res35[0xc];		// 0xc614
+	unsigned int	div_stat_cam;	// 0xc620
+	unsigned int	div_stat_tv;	// 0xc624
+	unsigned int	div_stat_mfc;	// 0xc628
+	unsigned int	div_stat_g3d;	// 0xc62c
+	unsigned char	res36[0x4];		// 0xc630
+	unsigned int	div_stat_lcd;	// 0xc634
+	unsigned int	div_stat_isp;	// 0xc638
+	unsigned int	div_stat_maudio;	// 0xc63c
+	unsigned int	div_stat_fsys0;		// 0xc640
+	unsigned int	div_stat_fsys1;		// 0xc644
+	unsigned int	div_stat_fsys2;		// 0xc648
+	unsigned int	div_stat_fsys3;		// 0xc64c
+	unsigned int	div_stat_peril0;	// 0xc650
+	unsigned int	div_stat_peril1;	// 0xc654
+	unsigned int	div_stat_peril2;	// 0xc658
+	unsigned int	div_stat_peril3;	// 0xc65c
+	unsigned int	div_stat_peril4;	// 0xc660
+	unsigned int	div_stat_peril5;	// 0xc664
+	unsigned int	div_stat_cam1;		// 0xc668
+	unsigned char	res37[0x14];		// 0xc66c
+	unsigned int	div2_stat;		// 0xc680
+	unsigned char	res38[0x29c];	// 0xc684
+	unsigned int	gate_ip_cam;	// 0xc920
+	unsigned int	gate_ip_tv;		// 0xc924
+	unsigned int	gate_ip_mfc;	// 0xc928
+	unsigned int	gate_ip_g3d;	// 0xc92c
+	unsigned char	res39[0x4];		// 0xc930
+	unsigned int	gate_ip_lcd;	// 0xc934
+	unsigned int	gate_ip_isp;	// 0xc938
+	unsigned char	res40[0x4];		// 0xc93c
+	unsigned int	gate_ip_fsys;	// 0xc940
+	unsigned char	res41[0x8];		// 0xc944
+	unsigned int	gate_ip_gps;	// 0xc94c
+	unsigned int	gate_ip_peril;	// 0xc950
+	unsigned char	res42[0xc];		// 0xc954
+	unsigned char	res43[0x4];		// 0xc960
+	unsigned char	res44[0xc];		// 0xc964
+	unsigned int	gate_block;		// 0xc970
+	unsigned char	res45[0x8c];	// 0xc974
+	unsigned int	clkout_cmu_top;		// 0xca00
+	unsigned int	clkout_cmu_top_div_stat;	// 0xca04
+	unsigned char	res46[0x3600];	// 0xca08
+	unsigned int	mpll_lock;		// 0x10008
+	unsigned char	res47[0xfc];	// 0x1000c
+	unsigned int	mpll_con0;		// 0x10108
+	unsigned int	mpll_con1;		// 0x1010c
+	unsigned char	res48[0xf0];	// 0x10110
+	unsigned int	src_dmc;		// 0x10200
+	unsigned char	res49[0xfc];	// 0x10204
+	unsigned int	src_mask_dmc;	// 0x10300
+	unsigned char	res50[0xfc];	// 0x10304
+	unsigned int	mux_stat_dmc;	// 0x10400
+	unsigned char	res51[0xfc];	// 0x10404
+	unsigned int	div_dmc0;		// 0x10500
+	unsigned int	div_dmc1;		// 0x10504
+	unsigned char	res52[0xf8];	// 0x10508
+	unsigned int	div_stat_dmc0;	// 0x10600
+	unsigned int	div_stat_dmc1;	// 0x10604
+	unsigned char	res53[0xf8];	// 0x10608
+	unsigned int	gate_bus_dmc0;	// 0x10700
+	unsigned int	gate_bus_dmc1;	// 0x10704
+	unsigned char	res54[0x1f8];	// 0x10708
+	unsigned int	gate_ip_dmc0;	// 0x10900
+	unsigned int	gate_ip_dmc1;	// 0x10904
+	unsigned char	res55[0xf8];	// 0x10908
+	unsigned int	clkout_cmu_dmc;	// 0x10a00
+	unsigned int	clkout_cmu_dmc_div_stat;	// 0x10a04
+	unsigned char	res56[0x5f8];	// 0x10a08
+	unsigned int	dcgidx_map0;	// 0x11000
+	unsigned int	dcgidx_map1;	// 0x11004
+	unsigned int	dcgidx_map2;	// 0x11008
+	unsigned char	res57[0x14];	// 0x1100c
+	unsigned int	dcgperf_map0;	// 0x11020
+	unsigned int	dcgperf_map1;	// 0x11024
+	unsigned char	res58[0x18];	// 0x11028
+	unsigned int	dvcidx_map;		// 0x11040
+	unsigned char	res59[0x1c];	// 0x11044
+	unsigned int	freq_cpu;	// 0x11060
+	unsigned int	freq_dpm;	// 0x11064
+	unsigned char	res60[0x18];	// 0x11068
+	unsigned int	dvsemclk_en;	// 0x11080
+	unsigned int	maxperf;		// 0x11084
+	unsigned char	res61[0x8];		// 0x11088
+	unsigned int	dmc_freq_ctrl;	// 0x11090
+	unsigned int	dmc_pause_ctrl;	// 0x11094
+	unsigned int	dddrphy_lock_ctrl;	// 0x11098
+	unsigned int	c2c_state;		// 0x1109c
+	unsigned char	res62[0x2f60];	// 0x110a0
+	unsigned int	apll_lock;		// 0x14000
+	unsigned char	res63[0x8];		// 0x14004
+	unsigned char	res64[0xf4];	// 0x1400c
+	unsigned int	apll_con0;		// 0x14100
+	unsigned int	apll_con1;		// 0x14104
+	unsigned char	res65[0xf8];	// 0x14108
+	unsigned int	src_cpu;		// 0x14200
+	unsigned char	res66[0x1fc];	// 0x14204
+	unsigned int	mux_stat_cpu;	// 0x14400
+	unsigned char	res67[0xfc];	// 0x14404
+	unsigned int	div_cpu0;		// 0x14500
+	unsigned int	div_cpu1;		// 0x14504
+	unsigned char	res68[0xf8];	// 0x14508
+	unsigned int	div_stat_cpu0;	// 0x14600
+	unsigned int	div_stat_cpu1;	// 0x14604
+	unsigned char	res69[0x2f8];	// 0x14608
+	unsigned int	clk_gate_ip_cpu;	// 0x14900
+	unsigned char	res70[0xfc];		// 0x14904
+	unsigned int	clkout_cmu_cpu;		// 0x14a00
+	unsigned int	clkout_cmu_cpu_div_stat;	// 0x14a04
+	unsigned char	res71[0x5f8];		// 0x14a08
+	unsigned int	armclk_stopctrl;	// 0x15000
+	unsigned int	atclk_stopctrl;		// 0x15004
+	unsigned char	res72[0x10];		// 0x15008
+	unsigned char	res73[0x8];		// 0x15018
+	unsigned int	pwr_ctrl;		// 0x15020
+	unsigned int	pwr_ctrl2;		// 0x15024
+	unsigned char	res74[0xd8];	// 0x15028
+	unsigned int	apll_con0_l8;	// 0x15100
+	unsigned int	apll_con0_l7;	// 0x15104
+	unsigned int	apll_con0_l6;	// 0x15108
+	unsigned int	apll_con0_l5;	// 0x1510c
+	unsigned int	apll_con0_l4;	// 0x15110
+	unsigned int	apll_con0_l3;	// 0x15114
+	unsigned int	apll_con0_l2;	// 0x15118
+	unsigned int	apll_con0_l1;	// 0x1511c
+	unsigned int	iem_control;	// 0x15120
+	unsigned char	res75[0xdc];	// 0x15124
+	unsigned int	apll_con1_l8;	// 0x15200
+	unsigned int	apll_con1_l7;	// 0x15204
+	unsigned int	apll_con1_l6;	// 0x15208
+	unsigned int	apll_con1_l5;	// 0x1520c
+	unsigned int	apll_con1_l4;	// 0x15210
+	unsigned int	apll_con1_l3;	// 0x15214
+	unsigned int	apll_con1_l2;	// 0x15218
+	unsigned int	apll_con1_l1;	// 0x1521c
+	unsigned char	res76[0xe0];	// 0x15220
+	unsigned int	div_iem_l8;		// 0x15300
+	unsigned int	div_iem_l7;		// 0x15304
+	unsigned int	div_iem_l6;		// 0x15308
+	unsigned int	div_iem_l5;		// 0x1530c
+	unsigned int	div_iem_l4;		// 0x15310
+	unsigned int	div_iem_l3;		// 0x15314
+	unsigned int	div_iem_l2;		// 0x15318
+	unsigned int	div_iem_l1;		// 0x1531c
+	unsigned char	res77[0xe0];	// 0x15320
+	unsigned int	l2_status;		// 0x15400
+	unsigned char	res78[0xc];		// 0x15404
+	unsigned int	cpu_status;		// 0x15410
+	unsigned char	res79[0xc];		// 0x15414
+	unsigned int	ptm_status;		// 0x15420
+	unsigned char	res80[0x2edc];	// 0x15424
+	unsigned int	div_isp0;		// 0x18300
+	unsigned int	div_isp1;		// 0x18304
+	unsigned char	res81[0xf8];	// 0x18308
+	unsigned int	div_stat_isp0;	// 0x18400
+	unsigned int	div_stat_isp1;	// 0x18404
+	unsigned char	res82[0x3f8];	// 0x18408
+	unsigned int	gate_ip_isp0;	// 0x18800
+	unsigned int	gate_ip_isp1;	// 0x18804
+	unsigned char	res83[0x1f8];	// 0x18808
+	unsigned int	clkout_cmu_isp;	// 0x18a00
+	unsigned int	clkout_cmu_ispd_div_stat;	// 0x18a04
+	unsigned char	res84[0xf8];	// 0x18a08
+	unsigned int	cmu_isp_spar0;	// 0x18b00
+	unsigned int	cmu_isp_spar1;	// 0x18b04
+	unsigned int	cmu_isp_spar2;	// 0x18b08
+	unsigned int	cmu_isp_spar3;	// 0x18b0c
+};
+
+
+#if 0
 struct exynos4x12_clock {
 	unsigned char	res1[0x4200];
 	unsigned int	src_leftbus;
@@ -512,6 +791,7 @@ struct exynos4x12_clock {
 	unsigned int	cmu_isp_spar2;
 	unsigned int	cmu_isp_spar3;
 };
+#endif
 
 struct exynos5_clock {
 	unsigned int	apll_lock;
