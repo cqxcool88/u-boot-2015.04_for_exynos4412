@@ -26,7 +26,7 @@
 #include <config.h>
 #include <asm/arch/dmc.h>
 #include "common_setup.h"
-#include "exynos4_setup.h"
+#include "landrover_setup.h"
 
 struct mem_timings mem = {
 	.direct_cmd_msr = {
@@ -77,6 +77,91 @@ static void dmc_config_mrs(struct exynos4_dmc *dmc, int chip)
 	}
 }
 
+static void dmc_init(struct exynos4_dmc *dmc)
+{
+	writel (0, &dmc->phycontrol2);
+	writel (0, &dmc->phycontrol3);
+	writel (0xE3855503, &dmc->phyzqcontrol);
+	writel (0x71101008, &dmc->phycontrol0);
+	writel (0x7110100A, &dmc->phycontrol0);
+	writel (0x20000086, &dmc->phycontrol1);
+	writel (0x71101008, &dmc->phycontrol0);
+	writel (0x2000008E, &dmc->phycontrol1);
+	writel (0x20000086, &dmc->phycontrol1);
+	writel (0x2000008E, &dmc->phycontrol1);
+	writel (0x20000086, &dmc->phycontrol1);
+	writel (0x0FFF30CA, &dmc->concontrol);
+	writel (0x00302600, &dmc->memcontrol);
+	writel (0x40801333, &dmc->memconfig0);
+	
+	writel (0x80000000|0x7, &dmc->ivcontrol);
+	writel (0x64000000, &dmc->prechconfig);
+	writel (0x9C4000FF, &dmc->phycontrol0);
+
+	// timing config
+	writel (0x000000BB, &dmc->timingref);
+	writel (0x7846654F, &dmc->timingrow);
+	writel (0x46400506, &dmc->timingdata);
+	writel (0x52000A3C, &dmc->timingpower);
+
+	sdelay (0x64);
+
+	writel (0x07000000, &dmc->directcmd);
+	sdelay (0x19000);
+
+	writel (0x00020000, &dmc->directcmd);
+	sdelay (0x2700);
+
+	writel (0x00030000, &dmc->directcmd);
+	sdelay (0x3f0);
+
+	writel (0x00010000, &dmc->directcmd);
+	writel (0x00000100, &dmc->directcmd);
+	sdelay(0x3f0);
+
+	writel (0x00000420, &dmc->directcmd);
+	sdelay(0x3f0);
+
+	writel (0x0A000000, &dmc->directcmd);
+	sdelay (0x3f0);
+
+	writel (0x7110100A, &dmc->phycontrol0);
+	writel (0x20000086, &dmc->phycontrol1);
+	writel (0x7110100B, &dmc->phycontrol0);
+
+	while (!(readl(&dmc->phystatus) & (1<<2)))
+		continue;
+
+	writel (0x2000008E, &dmc->phycontrol1);
+	writel (0x20000086, &dmc->phycontrol1);
+
+	while (!(readl(&dmc->phystatus) & (1<<2)))
+		continue;
+
+	unsigned int value;
+
+	value = readl (&dmc->concontrol);
+	value |= (1<<5);
+	writel (value, &dmc->concontrol);
+
+	value = readl (&dmc->memcontrol);
+	value |= ((1<<4) | (1<<1) | (1<<0));
+	writel (value, &dmc->memcontrol);
+}
+
+void mem_ctrl_init(int reset)
+{
+	struct exynos4_dmc *dmc; 
+
+	/* DREX0 */
+	dmc = (struct exynos4_dmc *)samsung_get_base_dmc_ctrl();
+	dmc_init(dmc);
+
+	dmc = (struct exynos4_dmc *)(0x10610000);
+	dmc_init(dmc);
+}
+
+#if 0
 static void dmc_init(struct exynos4_dmc *dmc)
 {
 	/*
@@ -211,3 +296,4 @@ void mem_ctrl_init(int reset)
 					+ DMC_OFFSET);
 	dmc_init(dmc);
 }
+#endif

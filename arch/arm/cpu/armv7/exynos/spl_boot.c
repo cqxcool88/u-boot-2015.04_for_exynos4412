@@ -34,8 +34,7 @@ enum index {
 u32 irom_ptr_table[] = {
 	[MMC_INDEX] = 0x02020030,	/* iROM Function Pointer-SDMMC boot */
 	[EMMC44_INDEX] = 0x02020044,	/* iROM Function Pointer-EMMC4.4 boot*/
-	[EMMC44_END_INDEX] = 0x02020048,/* iROM Function Pointer
-						-EMMC4.4 end boot operation */
+	[EMMC44_END_INDEX] = 0x02020048,/* iROM Function Pointer-EMMC4.4 end boot operation */
 	[SPI_INDEX] = 0x02020058,	/* iROM Function Pointer-SPI boot */
 	[USB_INDEX] = 0x02020070,	/* iROM Function Pointer-USB boot*/
 	};
@@ -183,6 +182,7 @@ static void exynos_spi_copy(unsigned int uboot_size, unsigned int uboot_addr)
 */
 void copy_uboot_to_ram(void)
 {
+	u32 ret = 0;
 	unsigned int bootmode = BOOT_MODE_OM;
 
 	u32 (*copy_bl2)(u32 offset, u32 nblock, u32 dst) = NULL;
@@ -254,8 +254,9 @@ void copy_uboot_to_ram(void)
 		break;
 	}
 
-	if (copy_bl2)
+	if (copy_bl2){
 		copy_bl2(offset, size, CONFIG_SYS_TEXT_BASE);
+	}
 }
 
 void memzero(void *s, size_t n)
@@ -293,7 +294,12 @@ void board_init_f(unsigned long bootflag)
 	if (do_lowlevel_init())
 		power_exit_wakeup();
 #if 1
+	//printascii("UART OK.\n\r");
+	//debug("ss");
+//	puts ("^_^\n");
 	copy_uboot_to_ram();
+
+//	printf("test\n");
 
 	/* Jump to U-Boot image */
 	uboot = (void *)CONFIG_SYS_TEXT_BASE;

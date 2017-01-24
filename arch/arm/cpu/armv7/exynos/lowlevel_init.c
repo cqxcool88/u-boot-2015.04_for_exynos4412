@@ -34,7 +34,8 @@
 #include <asm/arch/system.h>
 #include <asm/armv7.h>
 #include "common_setup.h"
-#include "exynos5_setup.h"
+//#include "exynos5_setup.h"
+#include "landrover_setup.h"
 
 /* These are the things we can do during low-level init */
 enum {
@@ -253,7 +254,7 @@ int do_lowlevel_init(void)
 		debug_uart_init();
 #endif
 		test_uart();
-
+//		printascii("start tzpc config\n");
 		mem_ctrl_init(actions & DO_MEM_RESET);
 //		tzpc_init();
 	}
