@@ -497,15 +497,14 @@ void board_init_r(gd_t *id, ulong dest_addr)
 #if !defined(CONFIG_SYS_NO_FLASH)
 	ulong flash_size;
 #endif
-
+	debug("1\n");
 	gd->flags |= GD_FLG_RELOC;	/* tell others: relocation done */
 	bootstage_mark_name(BOOTSTAGE_ID_START_UBOOT_R, "board_init_r");
-
+	debug("2");
 	monitor_flash_len = (ulong)&__rel_dyn_end - (ulong)_start;
 
 	/* Enable caches */
 	enable_caches();
-
 	debug("monitor flash len: %08lX\n", monitor_flash_len);
 	board_init();	/* Setup chipselects */
 	/*

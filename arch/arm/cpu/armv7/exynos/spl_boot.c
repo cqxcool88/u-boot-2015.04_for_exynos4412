@@ -293,18 +293,13 @@ void board_init_f(unsigned long bootflag)
 
 	if (do_lowlevel_init())
 		power_exit_wakeup();
-#if 1
-	//printascii("UART OK.\n\r");
-	//debug("ss");
-//	puts ("^_^\n");
-	copy_uboot_to_ram();
 
-//	printf("test\n");
+	copy_uboot_to_ram();
 
 	/* Jump to U-Boot image */
 	uboot = (void *)CONFIG_SYS_TEXT_BASE;
 	(*uboot)();
-#endif	/* Never returns Here */
+	/* Never returns Here */
 }
 
 /* Place Holders */
