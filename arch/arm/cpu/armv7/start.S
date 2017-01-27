@@ -31,11 +31,12 @@
 
 	.globl	reset
 	.globl	save_boot_params_ret
-	.globl	led_on
+	.globl	led2_on
+	.globl	led3_on
 #define MEM_DLLl_ON
 
-#if 0
-led_on:
+led2_on:
+#if 1
 	ldr r0, =0x11000100
 	mov r1, #1
 	str r1, [r0]
@@ -52,7 +53,7 @@ led_on:
 #endif
 
 /* added by cqx */
-led_on:
+led3_on:
 #if 1
 	ldr r0, =0x11000060		//GPK1[1] LED3
 	ldr r1, [r0]
@@ -102,7 +103,7 @@ save_boot_params_ret:
 	bl	cpu_init_cp15
 	bl	cpu_init_crit
 #endif
-//	bl	led_on
+//	bl	led2_on
 	bl	_main
 
 /*------------------------------------------------------------------------------*/

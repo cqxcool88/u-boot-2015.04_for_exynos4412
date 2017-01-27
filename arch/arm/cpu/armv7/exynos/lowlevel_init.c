@@ -254,7 +254,6 @@ int do_lowlevel_init(void)
 		debug_uart_init();
 #endif
 		test_uart();
-//		printascii("start tzpc config\n");
 		mem_ctrl_init(actions & DO_MEM_RESET);
 //		tzpc_init();
 	}

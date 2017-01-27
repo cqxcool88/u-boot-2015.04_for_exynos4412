@@ -65,6 +65,7 @@ ENTRY(_main)
 	ldr	sp, =(CONFIG_SPL_STACK)
 #else
 	ldr	sp, =(CONFIG_SYS_INIT_SP_ADDR)
+//	bl 	led2_on
 #endif
 	bic	sp, sp, #7	/* 8-byte alignment for ABI compliance */
 	mov	r2, sp
@@ -92,7 +93,6 @@ clr_gd:
  * relocate_code(addr_moni). Trick here is that we'll return
  * 'here' but relocated.
  */
-//	bl	led_on
 	ldr	sp, [r9, #GD_START_ADDR_SP]	/* sp = gd->start_addr_sp */
 	bic	sp, sp, #7	/* 8-byte alignment for ABI compliance */
 	ldr	r9, [r9, #GD_BD]		/* r9 = gd->bd */
@@ -142,7 +142,6 @@ clbss_l:cmp	r0, r1			/* while not at end of BSS */
 #if ! defined(CONFIG_SPL_BUILD)
 	bl coloured_LED_init
 	bl red_led_on
-//	bl led_on
 #endif
 	/* call board_init_r(gd_t *id, ulong dest_addr) */
 	mov     r0, r9                  /* gd_t */
